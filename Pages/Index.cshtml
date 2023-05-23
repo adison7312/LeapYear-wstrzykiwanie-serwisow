@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Leap Year";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Lata przestępne</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="YearForm.Name">Podaj imię: </label>
+            <input class="form-control" asp-for="YearForm.Name" />
+            <span asp-validation-for="YearForm.Name" class="text-danger" style="font-weight: bold;"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="YearForm.Year">Podaj rok</label>
+            <input class="form-control" asp-for="YearForm.Year" />
+            <span asp-validation-for="YearForm.Year" class="text-danger" style="font-weight: bold;"></span>
+        </div>
+        <br />
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-gap">Submit</button>
+        </div>
+    </form>
+    <br />
+
+    @if (Model.YearForm != null && ModelState.IsValid)
+    {
+        <div class="alert alert-success">
+            <p>@Model.YearForm.Result()</p>
+        </div>
+    }
+</div>

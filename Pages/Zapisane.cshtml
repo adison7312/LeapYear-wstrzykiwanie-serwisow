@@ -1,0 +1,39 @@
+﻿@page
+@model LeapYear.Pages.ZapisaneModel
+@{
+    ViewData["Title"] = "Historia wyszukiwań";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Historia wyszukiwań:</h1>
+    
+    <ul>
+        @foreach (var item in Model.Records)
+        {
+            string result = item.Result();
+            <li>
+                <p>@item.Year</p>
+                <p>@item.Timestamp.Day/@item.Timestamp.Month</p>
+                <p>@item.Timestamp.Hour:@item.Timestamp.Minute</p>
+                <p>@result</p>
+            </li>
+        }
+    </ul>
+
+    @{
+        var prevDisabled = !Model.YearForms.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.YearForms.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-page="./SearchHistory"
+       asp-route-pageIndex="@(Model.YearForms.PageIndex - 1)"
+       class="btn btn-primary @prevDisabled">
+        Poprzednia
+    </a>
+    <a asp-page="./SearchHistory"
+       asp-route-pageIndex="@(Model.YearForms.PageIndex + 1)"
+       class="btn btn-primary @nextDisabled">
+        Następna
+    </a>
+</div>
+</div>
